@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="login-form">
+      <h1 class="login-title">Login</h1>
+      <form>
+        <p class="form-text">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="yourmail@email.com"
+          />
+        </p>
+        <p class="form-text">
+          <label for="password">Password:</label>
+          <input type="password" id="password" minlength="6" />
+        </p>
+        <button type="submit" id="login">Login</button>
+      </form>
+    </div>
+    <script>
+      let submitted = document.getElementById("login");
+      const emailData = document.getElementById("email");
+      const passwordData = document.getElementById("password");
+      let mailRegex = "[a-z0-9]+@[a-z]+.[a-z]{2,3}";
+
+      const user = [
+        {
+          email: "johntitor@email.com",
+          password: "P455w0rd#",
+        },
+        {
+          email: "nepnep@email.com",
+          password: "Th!5N0tP455",
+        },
+      ];
+
+      const checkIsEmpty = () => {
+        if (passwordData.value == "" || emailData.value == "") {
+          return true;
+        }
+      };
+
+      const passwordCheck = () => {
+        if (passwordData.value.length < 6) {
+          return true;
+        }
+      };
+
+      const mailFormatCheck = () => {
+        if (!emailData.value.match(mailRegex)) {
+          return true;
+        }
+      };
+
+      const checkIfRegistered = () => {
+        console.log(emailData.value);
+        console.log(passwordData.value);
+        let dataFinded = false;
+        let passMatched = false;
+        for (let i of user) {
+          if (emailData.value == i.email) {
+            dataFinded = true;
+            if (passwordData.value == i.password) {
+              passMatched = true;
+            }
+          }
+        }
+        if (dataFinded && passMatched) {
+          alert("Login Success!, welcome " + emailData.value);
+          console.log("Welcome!");
+        } else {
+          alert("The email or password you entered is incorrect!");
+          console.log("Incorrect Login Credentials!");
+        }
+      };
+
+      const checkValidation = () => {
+        if (checkIsEmpty()) {
+          alert("Please fill in email and password fields!");
+        } else if (mailFormatCheck()) {
+          alert("Please enter correct email format!");
+        } else if (passwordCheck()) {
+          alert("Password should be at least 6 characters!");
+        } else {
+          checkIfRegistered();
+        }
+      };
+      submitted.addEventListener("click", checkValidation);
+    </script>
+  </body>
+</html>

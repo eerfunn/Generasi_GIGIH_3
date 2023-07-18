@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+  margin-left: 25vw;
+  margin-right: 25vw;
+}
+.login-form {
+  text-align: center;
+  width: 50vw;
+  background-color: white;
+  padding: 20px;
+  margin-top: 20vh;
+}
